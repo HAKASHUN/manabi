@@ -1,0 +1,777 @@
+@import "settings/settings";
+@import "generics/generics";
+
+/*
+  header
+*/
+.mb-header {
+  height: 65px;
+  border-top: 3px solid var(--sax-blue);
+  position: relative;
+}
+
+.mb-header-left, .mb-header-center, .mb-header-right {
+  height: 65px;
+}
+
+.mb-header-left, .mb-header-right {
+  position: absolute;
+  top: 0;
+}
+
+.mb-header-left {
+  left: 0;
+  padding-left: 20px;
+}
+
+.mb-header-right {
+  right: 0;
+  padding-right: 20px;
+  /* http://qiita.com/BEMU/items/0f500e0306471073ed63 */
+  font-size:0;
+}
+
+.mb-header-right a {
+  display: inline-block;
+  height: 37px;
+  width: 37px;
+  margin-top: 14px;
+  margin-left: 10px;
+}
+
+.mb-header-right a svg:hover g {
+  fill: var(--sax-blue);
+}
+
+.mb-header-center {
+  text-align: center;
+}
+
+.mb-header-center img {
+  display: inline-block;
+  border: 1px solid var(--gray);
+  border-radius: 100%;
+  margin-top: 14px;
+}
+
+.mb-header-title {
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+.mb-header-subtitle {
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+
+/*
+  footer
+ */
+.mb-footer {
+  margin-top: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: var(--gray);
+  text-align: center;
+}
+
+/*
+  list
+ */
+.mb-list {
+  color: var(--black);
+  width: 600px;
+  margin: 0 auto;
+}
+
+.mb-list-item {
+  padding: 20px 0 25px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.mb-list-item:first-child {
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.mb-list-item-article {
+  padding-bottom: 15px;
+}
+
+.mb-list-item-article > a {
+  color: inherit;
+  text-decoration: none;
+}
+.mb-list-item-article-title {
+  margin-top: 19px;
+  font-size: 31px;
+  line-height: 1.12;
+}
+.mb-list-item-article-subtitle {
+  font-size: 24px;
+  line-height: 1.18;
+  color: rgba(0,0,0,0.44);
+  font-weight: normal;
+  margin-top: 23px;
+}
+
+.mb-list-item-article-title + .mb-list-item-article-subtitle {
+  margin-top: 3px;
+}
+
+.mb-list-item-article-feature {
+  width: 600px;
+  height: 180px;
+  background-size: cover;
+  background-position: center center;
+  margin-top: 19px;
+}
+
+.mb-list-item-article-date {
+  font-size: 12px;
+  color: rgba(0,0,0,0.44);
+}
+
+.mb-list-item-footer {
+
+}
+
+.mb-list-item-readmore {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--sax-blue);
+  font-size: 14px;
+}
+
+/*
+  content
+*/
+.mb-content {
+  color: var(--black);
+  margin-top: 20px;
+}
+
+.mb-content > * {
+  width: 700px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 767px) {
+  .mb-content > * {
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+/*
+   h1
+ */
+.mb-content > h1 {
+  margin-top: 63px;
+  font-size: 52px;
+  line-height: 1.04;
+}
+
+.mb-content > h1:first-child {
+  margin-top: 0;
+}
+
+.mb-content > h2 + h1 {
+  margin-top: -3px;
+}
+
+/*
+   h2
+ */
+.mb-content > h2 {
+  margin-top: 65px;
+  font-size: 36px;
+  line-height: 1.15;
+}
+
+.mb-content > h2:first-child {
+  margin-top: 0;
+}
+
+.mb-content > h1 + h2 {
+  margin-top: 10px;
+}
+
+.mb-content > ul + h2 {
+  margin-top: 56px;
+}
+.mb-content > .mb-speakerdeck + h2 {
+
+}
+
+/*
+   h3
+ */
+.mb-content > h3 {
+  margin-top: 39px;
+  font-size: 28px;
+  font-weight: normal;
+  color: rgba(0,0,0,0.44);
+  line-height: 1.22;
+}
+
+.mb-content > p + h3 {
+  margin-top: 58px;
+}
+
+.mb-content > ul + h3 {
+  margin-top: 58px;
+}
+
+.mb-content > .mb-speakerdeck + h3 {
+
+}
+
+/*
+   paragraph
+ */
+.mb-content > p {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-top: 38px;
+}
+
+.mb-content > h2 + p {
+  margin-top: 12px;
+}
+
+.mb-content > h3 + p {
+  margin-top: 10px;
+}
+
+.mb-content > p + p {
+  margin-top: 29px;
+}
+
+.mb-content > blockquote + p {
+  margin-top: 54px;
+}
+
+/*
+   list
+ */
+.mb-content > ul,
+.mb-content > ol {
+  margin-top: 38px;
+  word-break: break-word;
+  word-wrap: break-word;
+  counter-reset: post;
+}
+
+.mb-content > p + ul,
+.mb-content > p + ol {
+  margin-top: 29px;
+}
+
+.mb-content > ul > li,
+.mb-content > ol > li {
+  font-size: 18px;
+  line-height: 1.58;
+  margin-left: 30px;
+  margin-bottom: 14px;
+}
+
+.mb-content > ul > li:last-child,
+.mb-content > ol > li:last-child {
+  margin-bottom: 0
+}
+
+
+.mb-content > ul li:before,
+.mb-content > ol li:before {
+  position: absolute;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 58px;
+  margin-left: -58px;
+  text-align: right;
+  padding-top: 2px;
+  padding-right: 15px;
+}
+
+.mb-content > ul > li:before {
+  font-family: FontAwesome;
+  content: "\f111";
+  font-size: 10px;
+  padding-top: 8px;
+}
+
+.mb-content > ol > li:before {
+  font-feature-settings: "liga" on,"lnum" on;
+  -moz-font-feature-settings: "liga" on,"lnum" on;
+  -webkit-font-feature-settings: "liga" on,"lnum" on;
+  padding-right: 12px;
+  counter-increment: post;
+  content: counter(post) "."
+}
+
+.mb-content > ul > li ul {
+  padding-left: 25px;
+}
+
+.mb-content > ul > li > ul > li:before {
+  font-family: FontAwesome;
+  content: "\f10c";
+  font-size: 10px;
+  padding-top: 8px;
+}
+
+.mb-content > ul > li > ul > li > ul > li:before {
+  font-family: FontAwesome;
+  content: "\f0c8";
+  font-size: 10px;
+  padding-top: 8px;
+}
+
+/*
+   hr
+ */
+.mb-content > hr {
+  margin-top: 52px;
+  margin-bottom: 42px;
+  display: block;
+  border: 0;
+  text-align: center;
+  box-sizing: content-box;
+  height: 0;
+}
+.mb-content > hr:before {
+  font-family: FontAwesome;
+  content: '\f005\f005\f005';
+  display: inline-block;
+  margin-left: 0.6em;
+  color: rgba(0,0,0,0.6);
+  position: relative;
+  top: -18px;
+  font-size: 10px;
+  letter-spacing: 0.6em;
+}
+
+/*
+   blockquote
+ */
+.mb-content > blockquote {
+  margin-top: 64px;
+  font-size: 28px;
+  font-style: italic;
+  color: rgba(0,0,0,0.6);
+  border: none;
+  padding: 0;
+  text-align: left;
+  line-height: 1.48;
+}
+
+.mb-content > blockquote > p {
+  padding-left: 50px;
+}
+
+.mb-content > p + blockquote {
+  margin-top: 55px;
+}
+
+/*
+   figure
+ */
+.mb-content > figure {
+  margin-top: 52px;
+  width: auto;
+}
+.mb-content > figure figcaption {
+  text-align: center;
+  color: rgba(0,0,0,0.6);
+}
+
+/*
+   strong
+ */
+.mb-content strong {
+  font-weight: bold;
+}
+
+.mb-content > :not(pre):not(code) span {
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgba(248,218,30,0.2), rgba(248,218,30,0.2));
+}
+
+.mb-content > :not(pre):not(code) span:hover {
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgba(248,218,30,0.7), rgba(248,218,30,0.7));
+}
+
+
+/*
+   anchor
+ */
+.mb-content a {
+  color: var(--black);
+  text-decoration: none;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 50%);
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: 0 23px;
+}
+
+.mb-content a:hover {
+  color: var(--sax-blue);
+  background-image: linear-gradient(to bottom, rgba(115, 153, 209, 1) 50%, rgba(115, 153, 209, 0.6) 50%);
+}
+
+@media not all, only screen and (min-resolution: 2dppx), only screen and (-webkit-min-device-pixel-ratio: 2) {
+  .mb-content a {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 25%, rgba(0,0,0,0) 25%);
+  }
+  .mb-content a:hover {
+    background-image: linear-gradient(to bottom, rgba(115, 153, 209, 0.8) 25%, rgba(115, 153, 209, 0) 25%);
+  }
+}
+
+/*
+   table
+ */
+.mb-content > table {
+  padding: 0;
+  margin-top: 52px;
+}
+
+.mb-content > p + table {
+  margin-top: 43px;
+}
+
+.mb-content > h2 + table {
+  margin-top: 46px;
+}
+
+.mb-content > h3 + table {
+  margin-top: 44px;
+}
+
+
+.mb-content > table tr {
+  border-top: 1px solid #cccccc;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+}
+.mb-content > table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+.mb-content > table tr th {
+  font-weight: bold;
+  border: 1px solid #cccccc;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+.mb-content > table tr td {
+  border: 1px solid #cccccc;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+.mb-content > table tr th :first-child,
+.mb-content > table tr td :first-child {
+  margin-top: 0;
+}
+.mb-content > table tr th :last-child,
+.mb-content > table tr td :last-child {
+  margin-bottom: 0;
+}
+
+/*
+   img
+ */
+.mb-content img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+/*
+   inline code
+ */
+.mb-content > :not(pre) code {
+  font-size: 12px;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+  vertical-align: middle;
+}
+.mb-content > :not(pre) code:before,
+.mb-content > :not(pre) code:after {
+  content: "\00a0";
+}
+
+/*
+   code block
+ */
+.mb-content > pre {
+  background: var(--oil-black);
+  border-radius: 4px;
+  margin-top: 52px;
+}
+
+.mb-content > p + pre {
+  margin-top: 43px;
+}
+
+.mb-content > h2 + pre {
+  margin-top: 46px;
+}
+
+.mb-content > h3 + pre {
+  margin-top: 44px;
+}
+
+.mb-content > pre > code {
+  padding: 16px;
+  display: block;
+  word-break: break-all;
+  word-wrap: break-word;
+  line-height: 1.3;
+}
+
+/*
+   speakerdeck
+ */
+.mb-content > .mb-speakerdeck {
+  margin-top: 52px;
+}
+.mb-content > p + .mb-speakerdeck {
+  margin-top: 43px;
+}
+
+.mb-content > h2 + .mb-speakerdeck {
+  margin-top: 46px;
+}
+
+.mb-content > h3 + .mb-speakerdeck {
+  margin-top: 44px;
+}
+
+/*
+   highlightjs
+ */
+
+/*
+Darkula color scheme from the JetBrains family of IDEs
+*/
+
+
+.hljs {
+  overflow-x: auto;
+  -webkit-text-size-adjust: none;
+}
+
+/*
+  css rules
+*/
+.language-css .hljs-attribute {
+  color: #9876AA;
+}
+
+.language-css .hljs-value {
+  color: #A9B7C6;
+}
+
+.language-css .hljs-class,
+.language-css .hljs-id {
+  color: #FFC66D;
+}
+
+.language-css .hljs-tag,
+.language-css .hljs-at_rule,
+.language-css .hljs-keyword,
+.language-css .hljs-important{
+  color: #CC7832;
+}
+
+.language-css .hljs-string {
+  color: #A5C261;
+}
+
+/*
+  javascript rules
+ */
+.language-javascript .hljs-keyword,
+.language-javascript .hljs-function .hljs-keyword{
+  color: #CC7832;
+}
+
+.language-javascript .hljs-function {
+  color: #A9B7C6;
+}
+
+.language-javascript .hljs-function .hljs-title {
+  color: #FFC66D;
+}
+
+.language-javascript .hljs-string {
+  color: #A5C261;
+}
+
+.language-javascript .hljs-function .hljs-params {
+  text-decoration: underline;
+}
+
+/*
+  json styles
+*/
+.language-json.hljs,
+.language-json .hljs-value,
+.language-json .hljs-literal{
+  color: #CC7832;
+}
+.language-json .hljs-attribute {
+  color: #9876AA;
+}
+.language-json .hljs-string {
+  color: #A5C261;
+}
+
+/*
+  html styles
+ */
+
+.language-html .hljs-tag .hljs-attribute {
+  color: #A9B7C6;
+}
+
+.language-html .hljs-tag .hljs-value {
+  color: #A5C261;
+}
+
+/*
+  default styles
+*/
+
+
+
+.hljs,
+.hljs-tag,
+.hljs-title,
+.aspectj .hljs-function,
+.hljs-pragma {
+  color: #A9B7C6;
+}
+
+.hljs-strongemphasis,
+.hljs-strong,
+.hljs-emphasis {
+  color: #a8a8a2;
+}
+
+.hljs-bullet,
+.hljs-blockquote,
+.hljs-horizontal_rule,
+.hljs-number,
+.hljs-regexp,
+.alias .hljs-keyword,
+.hljs-literal,
+.hljs-hexcolor {
+  color: #6896ba;
+}
+
+.hljs-tag .hljs-value,
+.hljs-code,
+.hljs-class .hljs-title:last-child {
+  color: #a6e22e;
+}
+
+.hljs-link_url {
+  font-size: 80%;
+}
+
+.hljs-emphasis,
+.hljs-strongemphasis,
+.hljs-class .hljs-title:last-child,
+.hljs-typename {
+  font-style: italic;
+}
+
+.hljs-keyword,
+.ruby .hljs-class .hljs-keyword:first-child,
+.ruby .hljs-function .hljs-keyword,
+.hljs-function,
+.hljs-change,
+.hljs-winutils,
+.hljs-flow,
+.nginx .hljs-title,
+.tex .hljs-special,
+.hljs-header,
+.hljs-attribute,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.hljs-tag .hljs-title,
+.hljs-value,
+.alias .hljs-keyword:first-child,
+.css .hljs-tag,
+.css .unit,
+.css .hljs-important,
+.xml .hljs-tag
+{
+  color: #FFD080;
+}
+
+.hljs-function .hljs-keyword,
+.hljs-class .hljs-keyword:first-child,
+.hljs-aspect .hljs-keyword:first-child,
+.hljs-constant,
+.hljs-typename,
+.css .hljs-attribute {
+  color: #FFD080;
+}
+
+.hljs-variable,
+.hljs-params,
+.hljs-class .hljs-title,
+.hljs-aspect .hljs-title {
+  color: #b9b9b9;
+}
+
+.hljs-string,
+.css .hljs-id,
+.hljs-subst,
+.hljs-type,
+.ruby .hljs-class .hljs-parent,
+.hljs-built_in,
+.django .hljs-template_tag,
+.django .hljs-variable,
+.smalltalk .hljs-class,
+.django .hljs-filter .hljs-argument,
+.smalltalk .hljs-localvars,
+.smalltalk .hljs-array,
+.hljs-attr_selector,
+.hljs-pseudo,
+.hljs-addition,
+.hljs-stream,
+.hljs-envvar,
+.apache .hljs-tag,
+.apache .hljs-cbracket,
+.tex .hljs-command,
+.hljs-prompt,
+.hljs-link_label,
+.hljs-link_url,
+.hljs-name {
+  color: #e0c46c;
+}
+
+.hljs-comment,
+.hljs-annotation,
+.hljs-pi,
+.hljs-doctype,
+.hljs-deletion,
+.hljs-shebang,
+.apache .hljs-sqbracket,
+.tex .hljs-formula {
+  color: #7f7f7f;
+}
+
+.hljs-decorator {
+  color: #bab429;
+}

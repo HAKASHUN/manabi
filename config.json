@@ -1,0 +1,15 @@
+{
+  "staticdir": "src/static",
+  "contentdir": "src/content",
+  "layoutdir": "src/layouts",
+  "publishdir": "build",
+  "title": "HAKASHUN manabi",
+  "baseurl": "http://localhost:8000",
+  "languageCode": "ja-jp",
+  "params": {
+    "googleAnalytics": "UA-XXXXXXXXXXX"
+  },
+  "permalinks" : {
+    "post": "/:year/:title"
+  }
+}

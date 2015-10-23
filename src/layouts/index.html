@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>title</title>
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+  <style>
+    @import url(https://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+    body {
+      font-family: 'Noto Sans Japanese', serif;
+      font-weight: 100;
+    }
+  </style>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+  {{ template "partials/header.html" . }}
+
+  <!-- list for posts -->
+  <ul class="mb-list">
+    {{ range where .Data.Pages "Section" "posts" }}
+    <li class="mb-list-item">
+      <article class="mb-list-item-article">
+        <a href="{{ .RelPermalink }}">
+          <div class="mb-list-item-article-date">
+            <span>{{ .Date.Format "January 02,2006" }}</span>
+          </div>
+          {{ with .Params.feature_img }}
+            <div class="mb-list-item-article-feature" style="background-image: url({{ . }});">
+            </div>
+          {{ end }}
+          <h2 class="mb-list-item-article-title">{{ .Title }}</h2>
+          {{ with .Params.excerpt }}
+            <h4 class="mb-list-item-article-subtitle">{{ . }}</h4>
+          {{ end }}
+        </a>
+      </article>
+      <div class="mb-list-item-footer">
+        <a href="{{ .RelPermalink }}" class="mb-list-item-readmore">Read more</a>
+      </div>
+    </li>
+    {{ end }}
+  </ul>
+</body>
+</html>
+
