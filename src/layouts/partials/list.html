@@ -1,0 +1,24 @@
+<ul class="mb-list">
+  {{ range .Pages }}
+  <li class="mb-list-item">
+    <article class="mb-list-item-article">
+      <a href="{{ .RelPermalink }}">
+        <div class="mb-list-item-article-date">
+          <span>{{ .Date.Format "January 02,2006" }}</span>
+        </div>
+        {{ with .Params.feature_img }}
+        <div class="mb-list-item-article-feature" style="background-image: url({{ . }});">
+        </div>
+        {{ end }}
+        <h2 class="mb-list-item-article-title">{{ .Title }}</h2>
+        {{ with .Params.excerpt }}
+        <p class="mb-list-item-article-subtitle">{{ . }}</p>
+        {{ end }}
+      </a>
+    </article>
+    <div class="mb-list-item-footer">
+      <a href="{{ .RelPermalink }}" class="mb-list-item-readmore">Read more</a>
+    </div>
+  </li>
+  {{ end }}
+</ul>

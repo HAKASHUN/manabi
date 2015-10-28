@@ -1,0 +1,12 @@
+<!-- Pagination -->
+{{ if or .HasPrev .HasNext }}
+<div class="mb-pagination">
+  {{ if .HasPrev }}
+  <a class="mb-button mb-pagination-item mb-pagination-prev" href="{{ .Prev.URL }}">&larr; Previous</a>
+  {{ end }}
+
+  {{ if .HasNext }}
+  <a class="mb-button mb-pagination-item mb-pagination-next" href="{{ .Next.URL }}">Next &rarr; </a>
+  {{ end }}
+</div>
+{{ end }}

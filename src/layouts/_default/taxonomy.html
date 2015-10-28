@@ -3,14 +3,22 @@
 <head>
   {{ template "partials/head.html" . }}
 </head>
-<body id="default-list">
+<body id="default-taxonomy">
 {{ template "partials/header.html" . }}
 
 {{ $paginator := .Paginator 10 }}
 
+<!-- title for tag list -->
+<div class="mb-list-header">
+  <p class="mb-list-header-title-prefix">TAGGED IN</p>
+  <h3 class="mb-list-header-title">{{ .Title }}</h3>
+</div>
+
 {{ template "partials/list.html" $paginator }}
 
 {{ template "partials/pagination.html" $paginator }}
+
+{{ template "partials/all-tags.html" . }}
 
 </body>
 </html>
