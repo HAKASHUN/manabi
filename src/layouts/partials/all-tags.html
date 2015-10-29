@@ -2,6 +2,6 @@
 <div class="mb-tags">
   <p class="mb-tags-title">ALL TAGS</p>
   {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-  <a class="mb-tags-item" href="/tags/{{ $name | urlize }}">{{ $name }}</a>
+  <a class="mb-tags-item" href="/manabi/tags/{{ $name | urlize }}">{{ $name }}</a>
   {{ end }}
 </div>
