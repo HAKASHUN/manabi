@@ -1,4 +1,4 @@
-box: debian
+box: node:latest
 build:
   steps:
     - npm-install
