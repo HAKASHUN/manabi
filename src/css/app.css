@@ -263,7 +263,7 @@ body {
 }
 
 .mb-list-item-article-feature {
-  width: 600px;
+  width: auto;
   height: 180px;
   background-size: cover;
   background-position: center center;

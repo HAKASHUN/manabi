@@ -3,7 +3,10 @@ date: "2015-10-28"
 title: "ブログ新しくしました"
 tags: ["雑談", "Hugo", "wercker", "cssnext"]
 excerpt: "ドメインとサーバー更新をおろそかにして、ブログを新しく作り直した話"
+feature_img: "/manabi/img/posts/2015/helloworld/feature.jpg"
 ---
+
+{{<img src="/manabi/img/posts/2015/font/feature.jpg" width="100%">}}
 
 # ブログ新しくしました
 
