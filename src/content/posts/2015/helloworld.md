@@ -6,7 +6,7 @@ excerpt: "ドメインとサーバー更新をおろそかにして、ブログ�
 feature_img: "/manabi/img/posts/2015/helloworld/feature.jpg"
 ---
 
-{{< img src="/manabi/img/posts/2015/helloworld/feature.jpg" width="100%" >}}
+{{% img src="/manabi/img/posts/2015/helloworld/feature.jpg" width="100%" %}}
 
 # ブログ新しくしました
 
