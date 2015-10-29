@@ -1,6 +1,11 @@
 <meta charset='utf-8'>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-<title>title</title>
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{end}}</title>
 <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/app.css">
+<meta property="og:type" content="{{ if .IsHome }}blog{{ else }}article{{end}}">
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{end}}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:locale" content="ja_JP" />

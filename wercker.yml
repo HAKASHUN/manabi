@@ -1,0 +1,15 @@
+box: debian
+build:
+  steps:
+    - npm-install
+    - script:
+      name: Generate static files
+      code: |
+        ./node_modules/.bin/gulp build
+    - arjen/hugo-build:
+        version: 0.14
+deploy:
+  steps:
+    - lukevivier/gh-pages@0.2.1:
+        token: $GITHUB_TOKEN
+        basedir: build
