@@ -4,7 +4,7 @@
   "layoutdir": "src/layouts",
   "publishdir": "build",
   "title": "HAKASHUN manabi",
-  "baseurl": "http://localhost:8000",
+  "baseurl": "http://hakashun.github.io/manabi",
   "languageCode": "ja-jp",
   "params": {
     "googleAnalytics": "UA-XXXXXXXXXXX"
