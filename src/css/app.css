@@ -412,6 +412,10 @@ body {
   margin-top: 54px;
 }
 
+.mb-content > p:empty {
+  display: none;
+}
+
 /*
    list
  */
