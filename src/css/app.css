@@ -1,8 +1,10 @@
-@import "settings/settings";
-@import "generics/generics";
-
+@import "color";
+@import "reset";
+@import "webfont";
 
 body {
+  font-family: 'Noto Sans Japanese', serif;
+  font-weight: 200;
   margin-bottom: 100px;
 }
 
@@ -817,11 +819,8 @@ Darkula color scheme from the JetBrains family of IDEs
 }
 
 /*
-  default styles
+  default highlight code styles
 */
-
-
-
 .hljs,
 .hljs-tag,
 .hljs-title,
