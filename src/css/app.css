@@ -552,6 +552,8 @@ body {
 .mb-content > figure figcaption {
   text-align: center;
   color: rgba(0,0,0,0.6);
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 /*
