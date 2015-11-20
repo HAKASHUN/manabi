@@ -3,6 +3,7 @@ date: "2015-11-20"
 title: "My Trello extension"
 tags: ["trello", "chrome extension"]
 excerpt: "trelloを快適に使うために、chrome extensionを作った話"
+feature_img: "/manabi/img/posts/2015/my-trello-extension/showLabelAndId.png"
 ---
 
 # My Trello extension
