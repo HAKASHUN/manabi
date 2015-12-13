@@ -3,6 +3,6 @@
 module.exports = {
   css: {
     src: 'src/css/app.css',
-    dst: 'build/css/'
+    dst: 'src/static/css'
   }
 };
