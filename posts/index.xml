@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on HAKASHUN manabi</title>
+    <link>http://hakashun.github.io/manabi/posts/</link>
+    <description>Recent content in Posts on HAKASHUN manabi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Mon, 14 Dec 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://hakashun.github.io/manabi/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Swift2のguardが便利そう</title>
+      <link>http://hakashun.github.io/manabi/posts/2015/guard/</link>
+      <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://hakashun.github.io/manabi/posts/2015/guard/</guid>
+      <description>
+
+&lt;h1 id=&#34;swift2のguardが便利そう:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift2のguardが便利そう&lt;/h1&gt;
+
+&lt;p&gt;swift2から&lt;code&gt;guard&lt;/code&gt;が使えるようになった。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A guard statement is used to transfer program control out of a scope if one or more conditions aren’t met.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/doc/uid/TP40014097-CH33-ID524&#34;&gt;Appleの公式レファレンス&lt;/a&gt;には上記のように書かれていた。&lt;/p&gt;
+
+&lt;h2 id=&#34;使用例:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;使用例&lt;/h2&gt;
+
+&lt;h3 id=&#34;swift1-2:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift1.2&lt;/h3&gt;
+
+&lt;p&gt;OptionalなInt値で、numを受け取る関数はちょっと書くのが面倒だった&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func sample(num: Int?) {
+  if num == nil {
+    return
+  }
+  
+  // numがnilでなかったら
+  // numをInt値をして以下を実行
+  let n = num!
+  print(n)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;こういうのよくありますよね&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;swift2:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift2&lt;/h3&gt;
+
+&lt;p&gt;guardを使えば、わかりやすく綺麗に書くことができる&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func sample(num: Int?) {
+  guard let n = num else {
+    return
+  }
+  print(n)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;もう少し複雑な使用例:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;もう少し複雑な使用例&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;reachableかつconnectedかつ、お客様の数が0より大きい時に処理を実行したい&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;swift1-2-1:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift1.2&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;func fetchListOfCustomers(customers: [Customer]?) {
+    if !reachable { 
+      return 
+    }
+    if !connected { 
+      return 
+    }
+    if let customers = customers where customers.count &amp;gt; 0 {
+        // Do it!
+        print(customers)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;swift2-1:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift2&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;func fetchListOfCustomers(customers: [Customer]?) {
+    guard reachable else { 
+      return 
+    }
+    guard connected else { 
+      return 
+    }
+    guard let customers = customers where customers.count &amp;gt; 0 else { 
+      return 
+    }
+
+    // Do it!
+    print(customers)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;もう少し簡潔に書くと&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func fetchListOfCustomers(customers: [Customer]?) {
+    guard reachable &amp;amp;&amp;amp; connected,
+          let customers = customers where customers.count &amp;gt; 0 else {
+        return      
+    }
+
+    // Do it!
+    print(customers)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;複雑な使用例2:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;複雑な使用例2&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;配列の中の値を取り出す&lt;/li&gt;
+&lt;li&gt;値がnilの時はなにもしたくない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;swift1-2-2:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift1.2&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;let maybeNumbers: [Int?] = [3, 7, nil, 12, 40]
+ 
+for maybeValue in maybeNumbers {
+    if let value = maybeValue {
+        print(value)
+    } else {
+        print(&amp;quot;No Value&amp;quot;)
+    }
+}
+
+// 出力結果
+// 3
+// 7
+// No Value
+// 12
+// 40
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;swift2-2:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift2&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;let maybeNumbers: [Int?] = [3, 7, nil, 12, 40]
+ 
+for maybeValue in maybeNumbers {
+    guard let value = maybeValue else {
+        print(&amp;quot;No Value&amp;quot;)
+        continue
+    }
+    print(value)
+}
+// 出力結果
+// 3
+// 7
+// No Value
+// 12
+// 40
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;もしnilが出た時点で、for文のループ止めたいなら&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let maybeNumbers: [Int?] = [3, 7, nil, 12, 40]
+ 
+for maybeValue in maybeNumbers {
+    guard let value = maybeValue else {
+        print(&amp;quot;No Value&amp;quot;)
+        break
+    }
+    print(value)
+}
+// 出力結果
+// 3
+// 7
+// No Value
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;guardをきちんと使えば、コードの可視性があがりそうですね^^&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;参考文献:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;参考文献&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://furuya02.hatenablog.com/entry/2015/08/15/102224&#34;&gt;Swift 2.0 で追加されたguard の有効利用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://appventure.me/2015/08/20/swift-pattern-matching-in-detail/&#34;&gt;Match Me if you can: Swift Pattern Matching in Detail.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://code.tutsplus.com/tutorials/swift-20-exit-early-with-guard--cms-24326&#34;&gt;Swift 2.0: Exit Early With guard&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.codingexplorer.com/the-guard-statement-in-swift-2/&#34;&gt;The Guard Statement in Swift 2
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>オリジナルのアイコンフォントを作成する</title>
+      <link>http://hakashun.github.io/manabi/posts/2015/iconfont/</link>
+      <pubDate>Sun, 13 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://hakashun.github.io/manabi/posts/2015/iconfont/</guid>
+      <description>
+
+&lt;h1 id=&#34;オリジナルのアイコンフォントを作成する:6f969ac5af23040a02ec272896a60ebf&#34;&gt;オリジナルのアイコンフォントを作成する&lt;/h1&gt;
+
+&lt;h2 id=&#34;やりたいこと:6f969ac5af23040a02ec272896a60ebf&#34;&gt;やりたいこと&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;自分で作ったアイコンを一つのフォント化する。&lt;/li&gt;
+&lt;li&gt;以降、アイコンを追加したい際は、ファイルを追加してビルドすればOK&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;使ったもの:6f969ac5af23040a02ec272896a60ebf&#34;&gt;使ったもの&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;gulp&lt;/li&gt;
+&lt;li&gt;gulp-iconfont&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;本当はgulpにも依存したくないけど&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;自分のsvg作成時のルール:6f969ac5af23040a02ec272896a60ebf&#34;&gt;自分のSVG作成時のルール&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/nfroidure/gulp-iconfont#preparing-svgs&#34;&gt;gulp-iconfontのレポジトリ&lt;/a&gt;に詳しく乗っているので、よく読む。&lt;/p&gt;
+
+&lt;h3 id=&#34;ツール:6f969ac5af23040a02ec272896a60ebf&#34;&gt;ツール&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sketch3を使う&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/nfroidure/gulp-iconfont#sketch&#34;&gt;Sketch3で作成する際のテンプレート&lt;/a&gt;があるので活用する
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;symbol-font-14px.sketch&lt;/code&gt;をベースにしました。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;サイズ:6f969ac5af23040a02ec272896a60ebf&#34;&gt;サイズ&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;500px&lt;/code&gt;以上の高さで作ること&lt;/li&gt;
+&lt;li&gt;基本的に幅と高さ&lt;code&gt;560px&lt;/code&gt;のSVGファイルを作成する
+
+&lt;ul&gt;
+&lt;li&gt;テンプレートのサイズ感をそのまま継承&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;アイコン本体は&lt;code&gt;480px&lt;/code&gt;の正方形に収まるようにする&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;カラー:6f969ac5af23040a02ec272896a60ebf&#34;&gt;カラー&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;黒色(&lt;code&gt;#000000&lt;/code&gt;)のベタ塗り&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure &gt;
+
+  &lt;img src=&#34;http://hakashun.github.io/manabi/manabi/img/posts/2015/iconfont/sample.png&#34; alt=&#34;試しにSketch3で作ってみた感じ&#34; width=&#34;1000&#34;  /&gt;
+  
+
+&lt;figcaption&gt;
+  &lt;p&gt;
+    試しにSketch3で作ってみた感じ
+    
+    
+    
+  &lt;/p&gt; 
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;作成したsvgからフォントファイルを作成:6f969ac5af23040a02ec272896a60ebf&#34;&gt;作成したsvgからフォントファイルを作成&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;root
+├── src
+│   └── icons
+│       └── wider.svg // 作成したsvgファイル
+└── fonts //作成したフォントを入れたいディレクトリ
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上記のようなディレクトリ構成にしたので、&lt;code&gt;src/icons/*.svg&lt;/code&gt;ファイルが、&lt;code&gt;src/fonts&lt;/code&gt;ディレクトリにフォントとして出力されるようにします。&lt;/p&gt;
+
+&lt;h3 id=&#34;gulpタスク:6f969ac5af23040a02ec272896a60ebf&#34;&gt;gulpタスク&lt;/h3&gt;
+
+&lt;p&gt;設定したgulpタスクは、こんな感じになりました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var gulp = require(&amp;quot;gulp&amp;quot;);
+var iconfont = require(&#39;gulp-iconfont&#39;);
+
+gulp.task(&#39;iconfont&#39;, function(){
+  return gulp.src([&#39;src/icons/*.svg&#39;])
+    .pipe(iconfont({
+      fontName: &#39;myfont&#39;,
+      appendUnicode: true,
+      formats: [&#39;ttf&#39;, &#39;eot&#39;, &#39;woff&#39;]
+    }))
+    .pipe(gulp.dest(&#39;fonts/&#39;));
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これを実行すると&amp;hellip;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gulp iconfont
+
+[14:56:08] Starting &#39;iconfont&#39;...
+[14:56:08] gulp-svgicons2svgfont: Font created
+[14:56:08] Finished &#39;iconfont&#39; after 114 ms
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以下のように、3種類の拡張子でフォントファイルが作成されました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root/fonts
+├── myfont.eot
+├── myfont.ttf
+└── myfont.woff
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;ガイドファイルも作成する:6f969ac5af23040a02ec272896a60ebf&#34;&gt;ガイドファイルも作成する&lt;/h2&gt;
+
+&lt;h3 id=&#34;割り当てられたunicodeがわからない:6f969ac5af23040a02ec272896a60ebf&#34;&gt;割り当てられたUnicodeがわからない&lt;/h3&gt;
+
+&lt;p&gt;フォントも無事に生成されて、無事に使おうと思ったところで問題が発生しました。
+作ったアイコンフォントを出すためのUnicodeがわからなかったのです。。。&lt;/p&gt;
+
+&lt;p&gt;そこで、フォントファイルの作成と同時に、フォントの中身や使い方を説明するガイドファイルを作る仕組みを入れることにしました。&lt;/p&gt;
+
+&lt;h3 id=&#34;テンプレートファイルの用意:6f969ac5af23040a02ec272896a60ebf&#34;&gt;テンプレートファイルの用意&lt;/h3&gt;
+
+&lt;p&gt;Sketch3のテンプレートを提供していた&lt;a href=&#34;https://github.com/cognitom/symbols-for-sketch&#34;&gt;symbols-for-sketch&lt;/a&gt;のレポジトリで、ガイドファイルを作成する仕組みがあるので、それを参考にしました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cognitom/symbols-for-sketch/blob/master/templates/fontawesome-style.html&#34;&gt;htmlのテンプレート&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cognitom/symbols-for-sketch/blob/master/templates/fontawesome-style.css&#34;&gt;cssのテンプレート&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;※テンプレートエンジンは&lt;a href=&#34;https://github.com/tj/consolidate.js&#34;&gt;consolidate&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;仕組みとしては、gulpでフォントファイルを生成する過程で、必要なパラメータをテンプレートに流し込む感じです。
+&lt;code&gt;gulp-iconfont&lt;/code&gt;が必要な情報を&lt;code&gt;glyphs&lt;/code&gt;というイベント名でemitしてくれるので、gulpfileは以下の様になります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;.on(&#39;glyphs&#39;, function(glyphs) {
+  // テンプレートに渡すパラメータを調整
+  var options = {
+    glyphs: glyphs.map(function(glyph) {
+      return { 
+        name: glyph.name, 
+        codepoint: 
+        glyph.unicode[0].charCodeAt(0) 
+      }
+    }),
+    fontName: fontName,
+    fontPath: &#39;../../fonts/&#39;,
+    className: &#39;s&#39;
+  };
+  
+  // ガイドCSSの作成
+  gulp.src(&#39;src/templates/fontawesome-style.css&#39;)
+    .pipe(consolidate(&#39;lodash&#39;, options))
+    .pipe(rename({ basename:fontName }))
+    .pipe(gulp.dest(&#39;dist/css/&#39;));
+
+  // ガイドHTMLの作成
+  gulp.src(&#39;src/templates/fontawesome-style.html&#39;)
+    .pipe(consolidate(&#39;lodash&#39;, options))
+    .pipe(rename({ basename:&#39;sample&#39; }))
+    .pipe(gulp.dest(&#39;dist/&#39;));
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、アイコンフォント作成時に、以下のようなガイドファイルが作成されます。
+CSSの中身をみれば、作成したアイコンフォントをどのように定義すればよいかわかります。&lt;/p&gt;
+
+&lt;figure &gt;
+
+  &lt;img src=&#34;http://hakashun.github.io/manabi/manabi/img/posts/2015/iconfont/preview.png&#34; alt=&#34;できたガイドファイルを開いてみた&#34; width=&#34;600&#34;  /&gt;
+  
+
+&lt;figcaption&gt;
+  &lt;p&gt;
+    できたガイドファイルを開いてみた
+    
+    
+    
+  &lt;/p&gt; 
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;作成されたガイドCSSをビルド時にアプリケーションのCSSに動的に組み込むこともできるので、かなりメンテナンス性のある形で自作のアイコンフォントを運用できると思います。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;最終的なgulpタスク:6f969ac5af23040a02ec272896a60ebf&#34;&gt;最終的なgulpタスク&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;var gulp = require(&amp;quot;gulp&amp;quot;);
+var iconfont = require(&#39;gulp-iconfont&#39;);
+var consolidate = require(&#39;gulp-consolidate&#39;);
+var rename = require(&amp;quot;gulp-rename&amp;quot;);
+
+var fontName = &#39;myfont&#39;;
+
+gulp.task(&#39;iconfont&#39;, function(){
+  return gulp.src([&#39;src/icons/*.svg&#39;])
+    .pipe(iconfont({
+      fontName: fontName,
+      appendUnicode: true,
+      formats: [&#39;ttf&#39;, &#39;eot&#39;, &#39;woff&#39;]
+    }))
+    .on(&#39;glyphs&#39;, function(glyphs) {
+      var options = {
+        glyphs: glyphs.map(function(glyph) {
+          // this line is needed because gulp-iconfont has changed the api from 2.0
+          return { name: glyph.name, codepoint: glyph.unicode[0].charCodeAt(0) }
+        }),
+        fontName: fontName,
+        fontPath: &#39;../../fonts/&#39;, // set path to font (from your CSS file if relative)
+        className: &#39;s&#39; // set class name in your CSS
+      };
+      gulp.src(&#39;src/templates/fontawesome-style.css&#39;)
+        .pipe(consolidate(&#39;lodash&#39;, options))
+        .pipe(rename({ basename:fontName }))
+        .pipe(gulp.dest(&#39;dist/css/&#39;)); // set path to export your CSS
+
+      // if you don&#39;t need sample.html, remove next 4 lines
+      gulp.src(&#39;src/templates/fontawesome-style.html&#39;)
+        .pipe(consolidate(&#39;lodash&#39;, options))
+        .pipe(rename({ basename:&#39;sample&#39; }))
+        .pipe(gulp.dest(&#39;dist/&#39;)); // set path to export your sample HTML
+    })
+    .pipe(gulp.dest(&#39;fonts/&#39;));
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;参考文献:6f969ac5af23040a02ec272896a60ebf&#34;&gt;参考文献&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cognitom/symbols-for-sketch&#34;&gt;symbols-for-sketch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://atsu666.com/entry-78.html&#34;&gt;gulpでWebFont作成を自動化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://thrbrd.hateblo.jp/entry/2015/02/14/012508&#34;&gt;gulpを使ってsvgからアイコンフォント (WEBフォント) を自作する最短の方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://memo.goodpatch.co/2015/01/make-icon-font/&#34;&gt;sprite画像はもう終わり？gulpでIcon Fontをつくろう！&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://akabeko.me/blog/2015/01/gulp-iconfont/&#34;&gt;gulp でアイコン フォント生成&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://liginc.co.jp/web/design/font/33237&#34;&gt;無料でできる！オリジナルアイコンフォントを作ってみよう&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://10251.net/original-icon-font&#34;&gt;アイコンフォント（Webフォント）自作のメモ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>[Trello]いっぱいになった、リスト内のカードを見やすくする機能</title>
+      <link>http://hakashun.github.io/manabi/posts/2015/my-trello-extension2/</link>
+      <pubDate>Fri, 04 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://hakashun.github.io/manabi/posts/2015/my-trello-extension2/</guid>
+      <description>
+
+&lt;h1 id=&#34;いっぱいになった-リスト内のカードを見やすくする機能:ed03507ebd037513d24171a9e2cd06ad&#34;&gt;いっぱいになった、リスト内のカードを見やすくする機能&lt;/h1&gt;
+
+&lt;p&gt;チームでTrelloを使ってタスクを管理しているのですが、週に1度、Trelloの画面を大きなディスプレイに映して進捗確認をしています。
+リスト内のカードが大量になってしまうと、パッとリスト内のカードを眺めるのに不便だったのでChrome Extensionで新しい機能をつけました。&lt;/p&gt;
+
+&lt;figure &gt;
+
+  &lt;img src=&#34;https://i.gyazo.com/65308f18db66357b5dba3a66e5d245a5.gif&#34; alt=&#34;リスト内のボタンを押すと、カードを横並びで表示する&#34; width=&#34;410&#34;  /&gt;
+  
+
+&lt;figcaption&gt;
+  &lt;p&gt;
+    リスト内のボタンを押すと、カードを横並びで表示する
+    
+    
+    
+  &lt;/p&gt; 
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;よりチームでの議論が活性化したり、個々人のタスク管理が捗ればと思います^^&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/HAKASHUN/my-trello-extension&#34;&gt;https://github.com/HAKASHUN/my-trello-extension&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>My Trello extension</title>
+      <link>http://hakashun.github.io/manabi/posts/2015/my-trello-extension/</link>
+      <pubDate>Fri, 20 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://hakashun.github.io/manabi/posts/2015/my-trello-extension/</guid>
+      <description>
+
+&lt;h1 id=&#34;my-trello-extension:c9e5436b43ec54e511647412f0300e46&#34;&gt;My Trello extension&lt;/h1&gt;
+
+&lt;p&gt;Trelloをより快適に使うために、様々なChrome Extensionがあります。
+調べてみると種々様々なものが色々あり、いっぱい入れたいたいなと思ったのですが、
+パフォーマンスの点や管理の点、チームメンバーで統一したりする際に不便だったので&lt;a href=&#34;https://github.com/HAKASHUN/my-trello-extension&#34;&gt;自分専用のもの&lt;/a&gt;を作って機能をまとめてみました。&lt;/p&gt;
+
+&lt;h2 id=&#34;機能:c9e5436b43ec54e511647412f0300e46&#34;&gt;機能&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ラベル名・カード番号の表示&lt;/li&gt;
+&lt;li&gt;リストのスリム化ボタンの追加&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;ラベル名-カード番号の表示:c9e5436b43ec54e511647412f0300e46&#34;&gt;ラベル名・カード番号の表示&lt;/h2&gt;
+
+&lt;p&gt;ラベル名とカード番号は、実はDOMとしてはすでに存在しているので、CSSを調整して表示してあげれば良いだけでした。&lt;/p&gt;
+
+&lt;figure &gt;
+
+  &lt;img src=&#34;http://hakashun.github.io/manabi/manabi/img/posts/2015/my-trello-extension/showLabelAndId.png&#34; alt=&#34;表示した際のキャプチャイメージ&#34; width=&#34;290&#34;  /&gt;
+  
+
+&lt;figcaption&gt;
+  &lt;p&gt;
+    表示した際のキャプチャイメージ
+    
+    
+    
+  &lt;/p&gt; 
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;ラベル名とカード番号を見せることで、ボードを眺めて議論する際に大変楽になりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;リストのスリム化ボタンの追加:c9e5436b43ec54e511647412f0300e46&#34;&gt;リストのスリム化ボタンの追加&lt;/h2&gt;
+
+&lt;p&gt;カードのリストが増えると、画面内にすべてのリストを表示することができず、一覧性が落ちてしまうため、カードの横幅をスリム化するためのボタンを追加しました。&lt;/p&gt;
+
+&lt;figure &gt;
+
+  &lt;img src=&#34;http://hakashun.github.io/manabi/manabi/img/posts/2015/my-trello-extension/showSlimButton.png&#34; alt=&#34;カードをスリム化するボタンを追加&#34; width=&#34;406&#34;  /&gt;
+  
+
+&lt;figcaption&gt;
+  &lt;p&gt;
+    カードをスリム化するボタンを追加
+    
+    
+    
+  &lt;/p&gt; 
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;Slim Listsボタンを押すと、下記のように画面のサイズ内にすべてのリストが入るように調整されます。
+&lt;span&gt;※カードは小さくなりすぎない(140pxまで)ようにしてあります。&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;figure &gt;
+
+  &lt;img src=&#34;http://hakashun.github.io/manabi/manabi/img/posts/2015/my-trello-extension/slimmedLists.png&#34;  width=&#34;916&#34;  /&gt;
+  
+
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Chrome Storeには出していませんが、試してみたい方は以下よりダウンロードして使ってみてください^^&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/HAKASHUN/my-trello-extension&#34;&gt;https://github.com/HAKASHUN/my-trello-extension&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ブログ新しくしました</title>
+      <link>http://hakashun.github.io/manabi/posts/2015/helloworld/</link>
+      <pubDate>Wed, 28 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://hakashun.github.io/manabi/posts/2015/helloworld/</guid>
+      <description>
+
+&lt;figure &gt;
+
+  &lt;img src=&#34;http://hakashun.github.io/manabi/manabi/img/posts/2015/helloworld/feature.jpg&#34;  width=&#34;100%&#34;  /&gt;
+  
+
+&lt;/figure&gt;
+
+
+&lt;h1 id=&#34;ブログ新しくしました:b0550240c0a1b7c12779ff8220a94c0f&#34;&gt;ブログ新しくしました&lt;/h1&gt;
+
+&lt;p&gt;これまでwordpressで運用していましたが、気づいたらドメインとサーバーが切れてました&amp;hellip;
+お金をかけるのも面倒なので、0円でブログを構築することにしました。&lt;/p&gt;
+
+&lt;h2 id=&#34;デザイン:b0550240c0a1b7c12779ff8220a94c0f&#34;&gt;デザイン&lt;/h2&gt;
+
+&lt;p&gt;読み物として、できるだけ読みやすくなるように、今回のブログリニューアルには以下のアプローチをとりました。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Mediumのレイアウトを分析し、ベースとして考える&lt;/li&gt;
+&lt;li&gt;日本語でのバランスを見ながら、調整を行う&lt;/li&gt;
+&lt;li&gt;その上で、自分らしさや好みを反映させる&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;結果的には、CSS設計など大変勉強になる点が多数あり、満足のいく結果となりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;使ったみた技術:b0550240c0a1b7c12779ff8220a94c0f&#34;&gt;使ったみた技術&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://cssnext.io/&#34;&gt;cssnext&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://wercker.com/&#34;&gt;wercker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;結構色々と試行錯誤しながら作ったので、細かい話はまた後ほど！&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

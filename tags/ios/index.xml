@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ios on HAKASHUN manabi</title>
+    <link>http://hakashun.github.io/manabi/tags/ios/</link>
+    <description>Recent content in Ios on HAKASHUN manabi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Mon, 14 Dec 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://hakashun.github.io/manabi/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Swift2のguardが便利そう</title>
+      <link>http://hakashun.github.io/manabi/posts/2015/guard/</link>
+      <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://hakashun.github.io/manabi/posts/2015/guard/</guid>
+      <description>
+
+&lt;h1 id=&#34;swift2のguardが便利そう:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift2のguardが便利そう&lt;/h1&gt;
+
+&lt;p&gt;swift2から&lt;code&gt;guard&lt;/code&gt;が使えるようになった。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A guard statement is used to transfer program control out of a scope if one or more conditions aren’t met.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/doc/uid/TP40014097-CH33-ID524&#34;&gt;Appleの公式レファレンス&lt;/a&gt;には上記のように書かれていた。&lt;/p&gt;
+
+&lt;h2 id=&#34;使用例:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;使用例&lt;/h2&gt;
+
+&lt;h3 id=&#34;swift1-2:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift1.2&lt;/h3&gt;
+
+&lt;p&gt;OptionalなInt値で、numを受け取る関数はちょっと書くのが面倒だった&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func sample(num: Int?) {
+  if num == nil {
+    return
+  }
+  
+  // numがnilでなかったら
+  // numをInt値をして以下を実行
+  let n = num!
+  print(n)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;こういうのよくありますよね&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;swift2:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift2&lt;/h3&gt;
+
+&lt;p&gt;guardを使えば、わかりやすく綺麗に書くことができる&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func sample(num: Int?) {
+  guard let n = num else {
+    return
+  }
+  print(n)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;もう少し複雑な使用例:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;もう少し複雑な使用例&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;reachableかつconnectedかつ、お客様の数が0より大きい時に処理を実行したい&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;swift1-2-1:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift1.2&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;func fetchListOfCustomers(customers: [Customer]?) {
+    if !reachable { 
+      return 
+    }
+    if !connected { 
+      return 
+    }
+    if let customers = customers where customers.count &amp;gt; 0 {
+        // Do it!
+        print(customers)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;swift2-1:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift2&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;func fetchListOfCustomers(customers: [Customer]?) {
+    guard reachable else { 
+      return 
+    }
+    guard connected else { 
+      return 
+    }
+    guard let customers = customers where customers.count &amp;gt; 0 else { 
+      return 
+    }
+
+    // Do it!
+    print(customers)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;もう少し簡潔に書くと&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func fetchListOfCustomers(customers: [Customer]?) {
+    guard reachable &amp;amp;&amp;amp; connected,
+          let customers = customers where customers.count &amp;gt; 0 else {
+        return      
+    }
+
+    // Do it!
+    print(customers)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;複雑な使用例2:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;複雑な使用例2&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;配列の中の値を取り出す&lt;/li&gt;
+&lt;li&gt;値がnilの時はなにもしたくない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;swift1-2-2:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift1.2&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;let maybeNumbers: [Int?] = [3, 7, nil, 12, 40]
+ 
+for maybeValue in maybeNumbers {
+    if let value = maybeValue {
+        print(value)
+    } else {
+        print(&amp;quot;No Value&amp;quot;)
+    }
+}
+
+// 出力結果
+// 3
+// 7
+// No Value
+// 12
+// 40
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;swift2-2:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;Swift2&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;let maybeNumbers: [Int?] = [3, 7, nil, 12, 40]
+ 
+for maybeValue in maybeNumbers {
+    guard let value = maybeValue else {
+        print(&amp;quot;No Value&amp;quot;)
+        continue
+    }
+    print(value)
+}
+// 出力結果
+// 3
+// 7
+// No Value
+// 12
+// 40
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;もしnilが出た時点で、for文のループ止めたいなら&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let maybeNumbers: [Int?] = [3, 7, nil, 12, 40]
+ 
+for maybeValue in maybeNumbers {
+    guard let value = maybeValue else {
+        print(&amp;quot;No Value&amp;quot;)
+        break
+    }
+    print(value)
+}
+// 出力結果
+// 3
+// 7
+// No Value
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;guardをきちんと使えば、コードの可視性があがりそうですね^^&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;参考文献:aa6a5648efb4b02504ab8fc27607580d&#34;&gt;参考文献&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://furuya02.hatenablog.com/entry/2015/08/15/102224&#34;&gt;Swift 2.0 で追加されたguard の有効利用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://appventure.me/2015/08/20/swift-pattern-matching-in-detail/&#34;&gt;Match Me if you can: Swift Pattern Matching in Detail.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://code.tutsplus.com/tutorials/swift-20-exit-early-with-guard--cms-24326&#34;&gt;Swift 2.0: Exit Early With guard&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.codingexplorer.com/the-guard-statement-in-swift-2/&#34;&gt;The Guard Statement in Swift 2
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

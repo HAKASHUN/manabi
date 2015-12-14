@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>雑談 on HAKASHUN manabi</title>
+    <link>http://hakashun.github.io/manabi/tags/%E9%9B%91%E8%AB%87/</link>
+    <description>Recent content in 雑談 on HAKASHUN manabi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Wed, 28 Oct 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://hakashun.github.io/manabi/tags/%E9%9B%91%E8%AB%87/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ブログ新しくしました</title>
+      <link>http://hakashun.github.io/manabi/posts/2015/helloworld/</link>
+      <pubDate>Wed, 28 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://hakashun.github.io/manabi/posts/2015/helloworld/</guid>
+      <description>
+
+&lt;figure &gt;
+
+  &lt;img src=&#34;http://hakashun.github.io/manabi/manabi/img/posts/2015/helloworld/feature.jpg&#34;  width=&#34;100%&#34;  /&gt;
+  
+
+&lt;/figure&gt;
+
+
+&lt;h1 id=&#34;ブログ新しくしました:b0550240c0a1b7c12779ff8220a94c0f&#34;&gt;ブログ新しくしました&lt;/h1&gt;
+
+&lt;p&gt;これまでwordpressで運用していましたが、気づいたらドメインとサーバーが切れてました&amp;hellip;
+お金をかけるのも面倒なので、0円でブログを構築することにしました。&lt;/p&gt;
+
+&lt;h2 id=&#34;デザイン:b0550240c0a1b7c12779ff8220a94c0f&#34;&gt;デザイン&lt;/h2&gt;
+
+&lt;p&gt;読み物として、できるだけ読みやすくなるように、今回のブログリニューアルには以下のアプローチをとりました。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Mediumのレイアウトを分析し、ベースとして考える&lt;/li&gt;
+&lt;li&gt;日本語でのバランスを見ながら、調整を行う&lt;/li&gt;
+&lt;li&gt;その上で、自分らしさや好みを反映させる&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;結果的には、CSS設計など大変勉強になる点が多数あり、満足のいく結果となりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;使ったみた技術:b0550240c0a1b7c12779ff8220a94c0f&#34;&gt;使ったみた技術&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://cssnext.io/&#34;&gt;cssnext&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://wercker.com/&#34;&gt;wercker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;結構色々と試行錯誤しながら作ったので、細かい話はまた後ほど！&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
