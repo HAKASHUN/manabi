@@ -11,7 +11,7 @@ swift2から`guard`が使えるようになった。
 
 > A guard statement is used to transfer program control out of a scope if one or more conditions aren’t met.
 
-Appleの公式レファレンスには上記のように書かれていた。
+[Appleの公式レファレンス](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/doc/uid/TP40014097-CH33-ID524)には上記のように書かれていた。
 
 ## 使用例
 
